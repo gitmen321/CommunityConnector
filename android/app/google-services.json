@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "701947184897",
+    "project_id": "redditfullstack-1aa9e",
+    "storage_bucket": "redditfullstack-1aa9e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:701947184897:android:13a8c0fbf05c96f901bd00",
+        "android_client_info": {
+          "package_name": "com.android.applic"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1iThF-SviMbpj2B6TZuPr6Oy0B8tpyac"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:701947184897:android:4f47b1c154d46fca01bd00",
+        "android_client_info": {
+          "package_name": "com.example.reddit_fullstack"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1iThF-SviMbpj2B6TZuPr6Oy0B8tpyac"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
