@@ -4,36 +4,38 @@ import 'package:reddit_fullstack/core/constants/constants.dart';
 import 'package:reddit_fullstack/feautures/auth/controller/auth_controller.dart';
 import 'package:reddit_fullstack/theme/pallet.dart';
 
-
 class SignInButton extends ConsumerWidget {
-  const SignInButton({super.key}); 
+  final bool isFromLogin;
+  const SignInButton({Key? key, this.isFromLogin = true}) : super(key: key);
 
-  void signInWithGoogle(BuildContext context, WidgetRef ref){
-    ref.read(authControllerProvider.notifier).signInWithGoogle(context);
-
+  void signInWithGoogle(BuildContext context, WidgetRef ref) {
+    ref.read(authControllerProvider.notifier).signInWithGoogle(context, isFromLogin);
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final currentTheme = ref.watch(themeNotifierProvider);
+
     return Padding(
-      padding: const EdgeInsets.all(18), 
+      padding: const EdgeInsets.all(18.0),
       child: ElevatedButton.icon(
-        onPressed: ()=>signInWithGoogle(context,ref),
+        onPressed: () => signInWithGoogle(context, ref),
         icon: Image.asset(
           Constants.googlePath,
-          height: 35,
+          width: 35,
         ),
         label: const Text(
           'Continue with Google',
-          style: TextStyle(fontSize: 18,color: Pallet.whiteColor),
+          style: TextStyle(fontSize: 18,
+          color: Pallete.whiteColor),
+          
         ),
         style: ElevatedButton.styleFrom(
-          backgroundColor: Pallet.greyColor,
-          minimumSize:const Size(double.infinity, 50),
+          backgroundColor: Pallete.darkModeAppTheme.cardColor,
+          minimumSize: const Size(double.infinity, 50),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20)
-          )
-      
+            borderRadius: BorderRadius.circular(20),
+          ),
         ),
       ),
     );

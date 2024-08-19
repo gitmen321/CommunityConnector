@@ -8,14 +8,15 @@ import 'package:routemaster/routemaster.dart';
 class SearchCommunityDelegate extends SearchDelegate {
   final WidgetRef ref;
   SearchCommunityDelegate(this.ref);
+
   @override
   List<Widget>? buildActions(BuildContext context) {
-    return [ 
+    return [
       IconButton(
         onPressed: () {
           query = '';
         },
-        icon: const Icon(Icons.clear),
+        icon: const Icon(Icons.close),
       ),
     ];
   }
@@ -24,7 +25,7 @@ class SearchCommunityDelegate extends SearchDelegate {
   Widget? buildLeading(BuildContext context) {
     return null;
   }
- 
+
   @override
   Widget buildResults(BuildContext context) {
     return const SizedBox();
@@ -32,26 +33,28 @@ class SearchCommunityDelegate extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-   return ref.watch(searchCommunityProvider(query)).when(data: (communities)=>
-    ListView.builder(
-      itemCount: communities.length,
-      itemBuilder: (BuildContext context, int index){
-        final community = communities[index];
-        return ListTile(
-          leading: CircleAvatar(
-            backgroundImage: NetworkImage(community.avatar),
+    return ref.watch(searchCommunityProvider(query)).when(
+          data: (communites) => ListView.builder(
+            itemCount: communites.length,
+            itemBuilder: (BuildContext context, int index) {
+              final community = communites[index];
+              return ListTile(
+                leading: CircleAvatar(
+                  backgroundImage: NetworkImage(community.avatar),
+                ),
+                title: Text('r/${community.name}'),
+                onTap: () => navigateToCommunity(context, community.name),
+              );
+            },
           ),
-          title: Text('r/${community.name}'),
-          onTap: ()=>naviagateToCommunity(context, community.name),
+          error: (error, stackTrace) => ErrorText(
+            error: error.toString(),
+          ),
+          loading: () => const Loader(),
         );
-      },
-      
-      ) , 
-    error: (error, stackTrace)=>ErrorText(error: error.toString(),),
-     loading: ()=>const Loader());
-    
-}
-void naviagateToCommunity(BuildContext context, String communityName){
+  }
+
+  void navigateToCommunity(BuildContext context, String communityName) {
     Routemaster.of(context).push('/r/$communityName');
   }
 }

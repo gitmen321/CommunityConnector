@@ -39,16 +39,15 @@ class _MyAppState extends ConsumerState<MyApp> {
         .getUserData(data.uid)
         .first;
     ref.read(userProvider.notifier).update((state) => userModel);
-    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     return ref.watch(authStateChangeProvider).when(
-          data: (data) => MaterialApp.router( 
-            title: 'Reddit',
+          data: (data) => MaterialApp.router(
             debugShowCheckedModeBanner: false,
-            theme: Pallet.darkModeAppTheme,
+            title: 'Community Connector',
+            theme: ref.watch(themeNotifierProvider),
             routerDelegate: RoutemasterDelegate(
               routesBuilder: (context) {
                 if (data != null) {
@@ -57,7 +56,7 @@ class _MyAppState extends ConsumerState<MyApp> {
                     return loggedInRoute;
                   }
                 }
-                return loggedOurRoute;
+                return loggedOutRoute;
               },
             ),
             routeInformationParser: const RoutemasterParser(),
